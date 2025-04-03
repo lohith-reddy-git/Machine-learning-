@@ -1,0 +1,121 @@
+(5)
+from math import sqrt
+from statistics import mode
+l=[[33.6,50,1],[26.6,30,0],[23.4,40,0],[43.1,67,0],[35.3,23,1],[35.9,67,1],[36.7,45,1],[25.7,46,0],[23.3,29,0],[31,56,1]]
+n=[43.6,40]
+k=3
+m=[]
+x=[]
+for i in l:
+    a=0
+    for j in range(len(n)-1):
+        a+= (i[j]-n[j])*(i[j]-n[j])
+    m.append(sqrt(a))
+a=sorted(m)
+for i in range(k):
+    x.append(m.index(a[i]))
+y=[]
+for i in x:
+    print(l[i])
+    y.append(l[i][-1])
+print()
+print("result -->",mode(y))
+	(6)
+# import required libraries
+from sklearn.datasets import load_iris
+from sklearn.naive_bayes import GaussianNB
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import confusion_matrix, accuracy_score
+
+# load iris dataset
+iris = load_iris()
+
+# split dataset into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(iris.data, iris.target, test_size=0.3, random_state=0)
+
+# create Naive Bayes classifier
+classifier = GaussianNB()
+
+# train the classifier using the training data
+classifier.fit(X_train, y_train)
+
+# predict the target values for the testing data
+y_pred = classifier.predict(X_test)
+
+# display confusion matrix and accuracy score
+cm = confusion_matrix(y_test, y_pred)
+print("Confusion Matrix:")
+print(cm)
+
+acc = accuracy_score(y_test, y_pred)
+print("Accuracy Score:", acc)
+
+(7) 
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+
+# Generate sample data
+np.random.seed(0)
+X = np.linspace(0, 10, 100).reshape(-1, 1)
+y = 2 * X + 1 + np.random.randn(100, 1)
+
+# Create linear regression object
+lr_model = LinearRegression()
+
+# Train the model using the training sets
+lr_model.fit(X, y)
+
+# Print the coefficients
+print('Coefficients: ', lr_model.coef_)
+print('Intercept: ', lr_model.intercept_)
+
+# Plot the data and the linear regression line
+plt.scatter(X, y, color='blue')
+plt.plot(X, lr_model.predict(X), color='red', linewidth=3)
+plt.title('Linear Regression')
+plt.xlabel('X')
+plt.ylabel('y')
+plt.show()
+	(8)
+# Step 1: Import the required modules
+from sklearn.datasets import make_classification
+from matplotlib import pyplot as plt
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import confusion_matrix
+import pandas as pd
+
+# Step 2: Generate the dataset
+x, y = make_classification(
+    n_samples=100,
+    n_features=1,
+    n_classes=2,
+    n_clusters_per_class=1,
+    flip_y=0.03,
+    n_informative=1,
+    n_redundant=0,
+    n_repeated=0
+)
+print(y)
+
+# Step 3: visualize the data
+plt.scatter(x, y, c=y, cmap='rainbow')
+plt.title('Scatter Plot of Logistic Regression')
+plt.show()
+
+# Step 4: Split the dataset
+x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=1)
+
+x_train.shape
+
+# Step 4: Perform Logistic Regression
+log_reg = LogisticRegression()
+log_reg.fit(x_train, y_train)
+
+# Step 5: Make prediction using the model
+y_pred = log_reg.predict(x_test)
+
+# Step 6: Display the Confusion Matrix
+confusion_matrix(y_test, y_pred)
+
